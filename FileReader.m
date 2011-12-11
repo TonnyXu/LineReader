@@ -20,10 +20,10 @@
  */
 @implementation FileReader
 
-- (void)dealloc{
-    [m_fileHandle release], m_fileHandle = nil;
-    [super dealloc];
-}
+//- (void)dealloc{
+//    [m_fileHandle release], m_fileHandle = nil;
+//    [super dealloc];
+//}
 
 /**
 	Initialized a file reader object.
@@ -37,7 +37,7 @@
 		if (!filePath || [filePath length] <= 0) {
 			return nil;
 		}
-		m_fileHandle = [[NSFileHandle fileHandleForReadingAtPath:filePath] retain];
+		m_fileHandle = [NSFileHandle fileHandleForReadingAtPath:filePath];
 		if (m_fileHandle == nil) {
 			return nil;
 		}
@@ -93,7 +93,7 @@
 
 	NSString* line = [currentData stringValueWithEncoding:NSUTF8StringEncoding];
     // finished with data
-    [currentData release], currentData = nil;
+//    [currentData release], currentData = nil;
 	return line;
 }
 
@@ -107,7 +107,7 @@
  */
 - (NSString*)readLineBackwards {
 
-	if (m_totalFileLength == 0 || m_currentInset == 0 && m_chunkSize == 0) {
+	if (m_totalFileLength == 0 || (m_currentInset == 0 && m_chunkSize == 0)) {
 		return nil;
 	}
 	
@@ -185,7 +185,7 @@
 	
 	NSString* line = [[NSString alloc] initWithData:currentData encoding:NSUTF8StringEncoding];
     // finished with data
-    [currentData release], currentData = nil;
+//    [currentData release], currentData = nil;
 	return line;
 }
 
